@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ApiError, RegisterUserData, User } from "@/types/user.types";
 
 const API_BASE_URL = "http://localhost:8080/api";
@@ -25,7 +26,22 @@ export async function fetchApi<T>(
       },
       ...options,
     });
-    const data = await response.json();
+    // const data = await response.json();
+    /**
+     * Check if response has body
+     * 204 No Content = no body
+     * 205 Reset Content = no body
+     */
+    const hasBody = response.status !== 204 && response.status !== 205;
+
+    // Parse JSON only if response has body
+    let data: any = null;
+    if (hasBody) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      }
+    }
 
     if (!response.ok) {
       throw new ApiErrorException(
@@ -57,7 +73,7 @@ export const userService = {
       body: JSON.stringify(userData),
     });
   },
-  async fetchAllUsers(): Promise<User[]> {
+  async getAllUsers(): Promise<User[]> {
     return fetchApi<User[]>("/users");
   },
   async getById(id: number): Promise<User> {
@@ -72,7 +88,7 @@ export const userService = {
       body: JSON.stringify(userData),
     });
   },
-  async delete(id: number): Promise<void> {
+  async deleteUser(id: number): Promise<void> {
     return fetchApi<void>(`/users/${id}`, {
       method: "DELETE",
     });
