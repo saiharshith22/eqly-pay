@@ -1,47 +1,30 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { RegisterUserForm } from "@/components/forms/RegisterUserForm";
+import { Toaster } from "@/components/ui/toaster";
 
 function App() {
   return (
-    <div className="min-h-screen bg-background p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
-        {/* Header */}
-        <header className="text-center space-y-4 animate-fade-in">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            EQLY-PAY
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Smart Expense Split & Settlement
-          </p>
-        </header>
-
-        {/* Test Card */}
-        <Card className="animate-slide-up">
-          <CardHeader>
-            <CardTitle>Setup Complete! 🎉</CardTitle>
-            <CardDescription>
-              React 19 + TypeScript + Tailwind + shadcn/ui is ready
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Testing components and styling...
+    <>
+      {/* Main Content */}
+      <div className="min-h-screen bg-background p-4 md:p-8">
+        <div className="max-w-2xl mx-auto space-y-8">
+          {/* Header */}
+          <header className="text-center space-y-4 pt-8 md:pt-12">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent animate-fade-in">
+              EQLY-PAY
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground">
+              Smart Expense Split & Settlement
             </p>
-            <div className="flex gap-4">
-              <Button>Primary Button</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-            </div>
-          </CardContent>
-        </Card>
+          </header>
+
+          {/* Registration Form */}
+          <RegisterUserForm />
+        </div>
       </div>
-    </div>
+
+      {/* Toast Notifications */}
+      <Toaster />
+    </>
   );
 }
 

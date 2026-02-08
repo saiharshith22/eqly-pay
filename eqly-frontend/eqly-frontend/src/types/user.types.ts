@@ -26,3 +26,9 @@ export interface ApiError {
   message: string;
   path: string;
 }
+
+export interface FormState {
+  success?: boolean;
+  error?: string;
+  data?: User;
+}
